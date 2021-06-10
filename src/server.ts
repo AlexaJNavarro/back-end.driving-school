@@ -1,6 +1,7 @@
 import express, {Application} from 'express'
 import cors from 'cors'
 import dataRouter from './route/data.route'
+import notesRouter from './route/notes.route'
 export class Server{
     private app: Application
     constructor(){
@@ -20,6 +21,7 @@ export class Server{
 
     private Route(){
         this.app.use(process.env.BASE_URL+'/data',dataRouter)
+        this.app.use(process.env.BASE_URL+'/notes',notesRouter)
     }
 
     private Listening(){
