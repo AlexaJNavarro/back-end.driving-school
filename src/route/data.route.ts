@@ -3,5 +3,6 @@ import {DataController} from '../controller/data.controller'
 const dataRouter = Router()
 dataRouter
     .get("/", DataController.GetAll)
+    .post("/", DataController.Validate)
 
 export default dataRouter

@@ -1,6 +1,27 @@
 import {Request, Response} from 'express'
 import {Answer} from '../helper/answer.helper'
+import notesEntity from '../entity/notes.entity'
 export class DataController{
+
+    public static async Validate(req:Request, res:Response){
+        const data:any = req.body
+        const value = notesEntity.findById(data.id)
+        console.log(value)
+        if(!value){
+            const notes = new notesEntity({simulacrum: data.score})
+            const save = await notes.save()
+            return save 
+        }else{
+            const notes = await notesEntity.findByIdAndUpdate(data.id, {simulacrum: data.score}, {useFindAndModify: false})
+            return notes 
+        }
+
+    }
+
+
+
+
+
     public static GetAll(req:Request, res:Response):Response{
         try {
 

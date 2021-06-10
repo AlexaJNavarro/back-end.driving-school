@@ -21,8 +21,6 @@ export class NotesModel{
         return notes
     }
     public static async DeleteAll(body:Array<object>){
-        // const notes = body
-        // console.log(notes)
         const value = null
         for (var i = 0; i < body.length;i++) {
             await notesEntity.findByIdAndRemove(body[i],{useFindAndModify: false})
