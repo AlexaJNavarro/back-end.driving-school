@@ -6,5 +6,6 @@ notesRouter
     .post("/", NotesController.Create)
     .put("/:ID", NotesController.Update)
     .delete("/:ID", NotesController.Delete)
+    .post("/delete-all", NotesController.DeleteAll)
 
 export default notesRouter

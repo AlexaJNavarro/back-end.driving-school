@@ -50,4 +50,15 @@ export class NotesController{
             return res.status(200).json(response)
         }
     }
+    public static async DeleteAll(req:Request, res:Response):Promise<Response>{
+        try {
+            const body:Array<object> = req.body
+            const notes = await NotesModel.DeleteAll(body)
+            const response = new Answer("Message", "Se elimino todos los registro", false, notes)
+            return res.status(200).json(response)
+        } catch (error) {
+            const response = new Answer("Error", error, true, null)
+            return res.status(200).json(response)
+        }
+    }
 }

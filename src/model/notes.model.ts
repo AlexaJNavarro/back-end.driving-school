@@ -14,18 +14,19 @@ export class NotesModel{
     public static async Update(id:string, body:NotesInterface){
         const notes = await notesEntity.findByIdAndUpdate(id, body, {useFindAndModify: false})
         return notes 
-        // const notes = new notesEntity(body)
-        // const update = await notesEntity.({id_student:id}, notes, { multi: true },(err, numAffected)=>{
-        //     if(err){
-        //         console.log(err)
-        //     }
-        //     console.log(numAffected)
-        // })
-        // return update 
     }
 
     public static Delete(id:string){
-        const notes = notesEntity.deleteOne({id_student:id})
+        const notes = notesEntity.deleteOne({_id:id})
         return notes
+    }
+    public static async DeleteAll(body:Array<object>){
+        // const notes = body
+        // console.log(notes)
+        const value = null
+        for (var i = 0; i < body.length;i++) {
+            await notesEntity.findByIdAndRemove(body[i],{useFindAndModify: false})
+        }
+        return value
     }
 }
