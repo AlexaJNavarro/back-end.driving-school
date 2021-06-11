@@ -18,8 +18,14 @@ export class NotesController{
         if(id.length==24){
             try {
                 const notes = await NotesModel.GetById(id)
-                const response = new Answer('Message',"Se realizo la consulta correctamente",false,notes)
-                return res.status(200).json(response)
+                if(notes!=null){
+                    const response = new Answer('Message',"Se realizo la consulta correctamente.",false,notes)
+                    return res.status(200).json(response)
+                }else{
+                    const response = new Answer('Message',"No se encontraron datos.",false,notes)
+                    return res.status(200).json(response)
+                }
+                
             } catch (error) {
                 const response = new Answer('Error',error,true,null)
                 return res.status(500).json(response)
