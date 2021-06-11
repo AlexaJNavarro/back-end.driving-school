@@ -2,7 +2,8 @@ import {Router} from 'express'
 import {NotesController} from '../controller/notes.controller'
 const notesRouter = Router()
 notesRouter
-    .get("/:ID", NotesController.GetAll)
+    .get("/", NotesController.GetAll)
+    .get("/:ID", NotesController.GetById)
     .post("/", NotesController.Create)
     .put("/:ID", NotesController.Update)
     .delete("/:ID", NotesController.Delete)

@@ -5,8 +5,18 @@ import {Answer} from '../helper/answer.helper'
 export class NotesController{
     public static async GetAll(req:Request, res:Response):Promise<Response>{
         try {
+            const notes = await NotesModel.GetAll()
+            const response = new Answer('Message',"Se realizo la consulta correctamente",false,notes)
+            return res.status(200).json(response)
+        } catch (error) {
+            const response = new Answer('Error',error,true,null)
+            return res.status(404).json(response)
+        }
+    }
+    public static async GetById(req:Request, res:Response):Promise<Response>{
+        try {
             const id = req.params.ID
-            const notes = await NotesModel.GetAll(id)
+            const notes = await NotesModel.GetById(id)
             const response = new Answer('Message',"Se realizo la consulta correctamente",false,notes)
             return res.status(200).json(response)
         } catch (error) {
