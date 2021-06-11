@@ -10,34 +10,74 @@ export class NotesController{
             return res.status(200).json(response)
         } catch (error) {
             const response = new Answer('Error',error,true,null)
-            return res.status(404).json(response)
+            return res.status(500).json(response)
         }
     }
     public static async GetById(req:Request, res:Response):Promise<Response>{
-        try {
-            const id = req.params.ID
-            const notes = await NotesModel.GetById(id)
-            const response = new Answer('Message',"Se realizo la consulta correctamente",false,notes)
-            return res.status(200).json(response)
-        } catch (error) {
-            const response = new Answer('Error',error,true,null)
+        const id = req.params.ID
+        if(id.length==24){
+            try {
+                const notes = await NotesModel.GetById(id)
+                const response = new Answer('Message',"Se realizo la consulta correctamente",false,notes)
+                return res.status(200).json(response)
+            } catch (error) {
+                const response = new Answer('Error',error,true,null)
+                return res.status(500).json(response)
+            }
+        }else{
+            const response = new Answer('Error',"No es valido el id",true,null)
             return res.status(404).json(response)
         }
+        
     }
 
     public static async Create(req:Request, res:Response):Promise<Response>{
-        try {
-            const body:NotesInterface = req.body
-            const notes = await NotesModel.Create(body)
-            const response = new Answer('Message',"Se registro correctamente",false,notes)
-            return res.status(201).json(response)
-        } catch (error) {
-            const response = new Answer('Error',error,true,null)
+        const body:NotesInterface = req.body
+        if(body._id.length==24){
+            if(body.id_teacher.length == 24 && body.id_student.length==24){
+                if(typeof body.notes.simulacrum === 'number' && typeof body.notes.hours === 'number' && typeof body.notes.theoric_exam === 'number' && typeof body.notes.practice_exam === 'number'){
+                    try {
+                        const notes = await NotesModel.Create(body)
+                        const response = new Answer('Message',"Se registro correctamente",false,notes)
+                        return res.status(201).json(response)
+                    } catch (error) {
+                        const response = new Answer('Error',error,true,null)
+                        return res.status(404).json(response)
+                    }
+                }else{
+                    const response = new Answer('Error',"No es valido los datos ingresados de la colección Notas",true,null)
+                    return res.status(404).json(response)
+                }
+
+            }else{
+                const response = new Answer('Error',"No es valido el id del profesor o del estudiante",true,null)
+                return res.status(404).json(response)
+            }
+
+        }else{
+            const response = new Answer('Error',"No es valido el id",true,null)
             return res.status(404).json(response)
         }
-
     }
     public static async Update(req:Request, res:Response):Promise<Response>{
+        // if(body._id.length==24){
+        //     if(body.id_teacher.length == 24 && body.id_student.length==24){
+        //         if(typeof body.notes.simulacrum === 'number' && typeof body.notes.hours === 'number' && typeof body.notes.theoric_exam === 'number' && typeof body.notes.practice_exam === 'number'){
+
+        //         }else{
+        //             const response = new Answer('Error',"No es valido los datos ingresados de la colección Notas",true,null)
+        //             return res.status(404).json(response)
+        //         }
+
+        //     }else{
+        //         const response = new Answer('Error',"No es valido el id del profesor o del estudiante",true,null)
+        //         return res.status(404).json(response)
+        //     }
+
+        // }else{
+        //     const response = new Answer('Error',"No es valido el id",true,null)
+        //     return res.status(404).json(response)
+        // }
         try {
             const id = req.params.ID
             const body:NotesInterface = req.body

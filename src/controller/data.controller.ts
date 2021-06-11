@@ -7,18 +7,30 @@ export class DataController{
 
     public static async Validate(req:Request, res:Response):Promise<Response>{
         const data:DataInterface = req.body
-        const value:any = await notesEntity.findById(data.id).exec()
+        if(data.id.length == 24 && data.id_student.length == 24 && typeof data.score === 'number'){
+            const value:any = await notesEntity.findById(data.id).exec()
 
-        if(value!=null){
-            const result = await notesEntity.findByIdAndUpdate(data.id , {$set: {"notes.simulacrum": data.score}},{useFindAndModify: false})
-            const response = new Answer("Message", "Se actulizo exitosamente",false,result)
-            return res.status(200).json(response) 
+            try {
+                if(value!=null){
+                    const result = await notesEntity.findByIdAndUpdate(data.id , {$set: {"notes.simulacrum": data.score}},{useFindAndModify: false})
+                    const response = new Answer("Message", "Se actulizo el puntaje exitosamente",false,result)
+                    return res.status(200).json(response) 
+                }else{
+                    const notes = await notesEntity.create({id_student:data.id_student,"notes.simulacrum": data.score})
+                    console.log(notes)
+                    const response = new Answer("Message", "Se requistro el puntaje exitosamente", false, notes)
+                    return res.status(201).json(response)
+                }
+            } catch (error) {
+                const response = new Answer("Error", error, true, null)
+                return res.status(500).json(response)
+            }
         }else{
-            const notes = await notesEntity.create({id_student:data.id_student,"notes.simulacrum": data.score})
-            console.log(notes)
-            const response = new Answer("Message", "Se requistro el puntaje exitosamente", false, notes)
-            return res.status(201).json(response)
+            const response = new Answer("Error", "Los datos enviados, no son correctos", true, null)
+            return res.status(404).json(response)
         }
+
+        
 
     }
 
