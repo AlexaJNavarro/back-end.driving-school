@@ -10,7 +10,7 @@ const notesSchema:Schema = new Schema({
         type: String,
         requiere:true
     },
-    notes:[{
+    notes:{
         simulacrum: {
             type: Number,
             requiere:true
@@ -27,7 +27,7 @@ const notesSchema:Schema = new Schema({
             type: Number,
             requiere:true
         }
-    }]
+    }
 })
 
 export default model<NotesInterface>('notes',notesSchema)

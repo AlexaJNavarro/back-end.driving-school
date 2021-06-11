@@ -1,20 +1,30 @@
 import {Request, Response} from 'express'
 import {Answer} from '../helper/answer.helper'
 import notesEntity from '../entity/notes.entity'
+import {DataInterface}from '../interface/data.interface'
+import { isValidObjectId } from 'mongoose'
 export class DataController{
 
-    public static async Validate(req:Request, res:Response){
-        const data:any = req.body
-        const value = notesEntity.findById(data.id)
-        console.log(value)
-        if(!value){
-            const notes = new notesEntity({simulacrum: data.score})
-            const save = await notes.save()
-            return save 
-        }else{
-            const notes = await notesEntity.findByIdAndUpdate(data.id, {simulacrum: data.score}, {useFindAndModify: false})
-            return notes 
+    public static async Validate(req:Request, res:Response):Promise<Response>{
+        const data:DataInterface = req.body
+        const value:any = await notesEntity.findById(data.id).exec()
+
+
+        if(value!=null){
+            const result = await notesEntity.findByIdAndUpdate(data.id , {$set: {"notes.simulacrum": data.score}},{useFindAndModify: false})
+            console.log(result)
+            // const result = value.notes.simulacrum
+            // console.log(result)
+            // const children:any = await value.notes.findOne({ 'value.notes._id': new isValidObjectId() }
+            const response = new Answer("Message", "Se actulizo exitosamente",false,result)
+            return res.status(200).json(response) 
         }
+        // }else{
+            //const notes = new notesEntity({simulacrum: data.score})
+            //const save = await notes.save()
+            //return save 
+        // }
+        return value
 
     }
 
