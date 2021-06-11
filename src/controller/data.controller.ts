@@ -22,10 +22,6 @@ export class DataController{
 
     }
 
-
-
-
-
     public static GetAll(req:Request, res:Response):Response{
         try {
 
@@ -58,6 +54,76 @@ export class DataController{
                     option3: "Conducir un vehículo con el motor en punto neutro o apagado.",
                     option4: "Todas las alternativas son correctas.",
                     response: 4,
+                    value:0
+                },
+                {
+                    question: "La siguiente señal vertical reglamentaria R-53:",
+                    image: "img",
+                    option1: "Prohíbe estacionar.",
+                    option2: "Prohíbe al conductor detener el vehículo dentro del área de la intersección.",
+                    option3: "Prohíbe la carga y descarga.",
+                    option4: "Prohíbe la circulación de vehículos motorizados.",
+                    response: 2,
+                    value:0
+                },
+                {
+                    question: "Sobre la emisión vehicular de sustancias contaminantes, marque la opción correcta:",
+                    image: "",
+                    option1: "Está permitida.",
+                    option2: "Está prohibida, en un índice superior al límite máximo que permite la norma.",
+                    option3: "Está prohibida en el ámbito urbano.",
+                    option4: "La norma no regula sobre ello.",
+                    response: 2,
+                    value:0
+                },
+                {
+                    question: "La siguiente señal (P-46-A), indica:",
+                    image: "img",
+                    option1: "Que los ciclistas deben usar la ciclovía.",
+                    option2: "Que nos aproximamos a un cruce de ciclovía.",
+                    option3: "Que la ciclovía es solo para los ciclistas.",
+                    option4: "Todas las alternativas son correctas.",
+                    response: 2,
+                    value:0
+                },
+                {
+                    question: "Si un conductor sale de su propiedad y tiene que cruzar la acera e ingresar a una vía, la conducta correcta es:",
+                    image: "",
+                    option1: "Dar preferencia de paso solo a los vehículos que circulan por la vía, pero no a los peatones.",
+                    option2: "Dar preferencia de paso a los vehículos que circulan por la vía y a los peatones que circulan por la acera.",
+                    option3: "Tocar el claxon para advertir a los peatones que circulen por la acera, que se detengan.",
+                    option4: "Salir rápidamente, a fin de evitar accidentes.",
+                    response: 2,
+                    value:0
+                },
+                {
+                    question: "El conductor que en una vía urbana va a girar a la izquierda, a la derecha o en “U” debe hacer la señal respectiva con la luz direccional, por lo menos:",
+                    image: "",
+                    option1: "2 segundos antes de realizar la maniobra.",
+                    option2: "1 metro antes de realizar la maniobra.",
+                    option3: "20 metros antes de realizar la maniobra.",
+                    option4: "3 metros antes de realizar la maniobra.",
+                    response: 3,
+                    value:0
+                },
+                {
+                    question: "La siguiente señal (I-18), se utiliza para indicar:",
+                    image: "img",
+                    option1: "Cercanía a una ferretería.",
+                    option2: "Cercanía a un servicio mecánico.",
+                    option3: "Cercanía a un grifo.",
+                    option4: "Ninguna de las alternativas es correcta.",
+                    response: 2,
+                    value:0
+                },
+                {
+                    question: "Si llega a una intersección donde el semáforo muestra una luz intermitente, qué afirmación es correcta",
+                    image: "",
+                    option1: "Si la luz intermitente es roja, ésta es equivalente a un “CEDA EL PASO”.",
+                    option2: "Si la luz intermitente es ámbar, tiene preferencia, debiendo reducir la velocidad y continuar con precaución.",
+                    option3: "Si la luz intermitente es verde, ésta es equivalente a un “PARE”.",
+                    option4: "Ninguna de las alternativas es correcta.",
+                    response: 2,
                     value:0
                 }
             ]
