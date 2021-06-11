@@ -2,8 +2,8 @@ import {NotesInterface} from '../interface/notes.interface'
 import notesEntity from '../entity/notes.entity'
 
 export class NotesModel{
-    public static GetAll(){
-        const notes = notesEntity.find()
+    public static GetAll(id:string){
+        const notes = notesEntity.findById({_id:id}).exec()
         return notes
     }
     public static async Create(body: NotesInterface){

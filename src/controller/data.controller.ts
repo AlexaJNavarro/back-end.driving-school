@@ -9,22 +9,16 @@ export class DataController{
         const data:DataInterface = req.body
         const value:any = await notesEntity.findById(data.id).exec()
 
-
         if(value!=null){
             const result = await notesEntity.findByIdAndUpdate(data.id , {$set: {"notes.simulacrum": data.score}},{useFindAndModify: false})
-            console.log(result)
-            // const result = value.notes.simulacrum
-            // console.log(result)
-            // const children:any = await value.notes.findOne({ 'value.notes._id': new isValidObjectId() }
             const response = new Answer("Message", "Se actulizo exitosamente",false,result)
             return res.status(200).json(response) 
+        }else{
+            const notes = await notesEntity.create({id_student:data.id_student,"notes.simulacrum": data.score})
+            console.log(notes)
+            const response = new Answer("Message", "Se requistro el puntaje exitosamente", false, notes)
+            return res.status(201).json(response)
         }
-        // }else{
-            //const notes = new notesEntity({simulacrum: data.score})
-            //const save = await notes.save()
-            //return save 
-        // }
-        return value
 
     }
 

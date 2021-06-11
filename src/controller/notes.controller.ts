@@ -5,7 +5,8 @@ import {Answer} from '../helper/answer.helper'
 export class NotesController{
     public static async GetAll(req:Request, res:Response):Promise<Response>{
         try {
-            const notes = await NotesModel.GetAll()
+            const id = req.params.ID
+            const notes = await NotesModel.GetAll(id)
             const response = new Answer('Message',"Se realizo la consulta correctamente",false,notes)
             return res.status(200).json(response)
         } catch (error) {
